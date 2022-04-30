@@ -5,6 +5,7 @@ void main() {
 }
 
 String _inputVal = "0";
+String lastMove = '';
 
 void calculate(int value) {}
 
@@ -60,6 +61,7 @@ class _HomeState extends State<Home> {
   }
 
   void addition() {
+    lastMove = 'plus';
     if (flg) {
       if (_secondInput.length > 0) {
         setState(() {
@@ -69,7 +71,94 @@ class _HomeState extends State<Home> {
         });
       }
     } else {
-      flg = true;
+      setState(() {
+        flg = true;
+      });
+    }
+  }
+
+  void divide() {
+    lastMove = 'divide';
+    if (flg) {
+      if (_secondInput.length > 0) {
+        setState(() {
+          var temp = int.parse(_inputVal) / int.parse(_secondInput);
+          _inputVal = temp.toString();
+          _secondInput = "";
+        });
+      }
+    } else {
+      setState(() {
+        flg = true;
+      });
+    }
+  }
+
+  void multiply() {
+    lastMove = 'multiply';
+    if (flg) {
+      if (_secondInput.length > 0) {
+        setState(() {
+          var temp = int.parse(_inputVal) * int.parse(_secondInput);
+          _inputVal = temp.toString();
+          _secondInput = "";
+        });
+      }
+    } else {
+      setState(() {
+        flg = true;
+      });
+    }
+  }
+
+  void subtract() {
+    lastMove = 'minus';
+    if (flg) {
+      if (_secondInput.length > 0) {
+        setState(() {
+          var temp = int.parse(_inputVal) - int.parse(_secondInput);
+          _inputVal = temp.toString();
+          _secondInput = "";
+        });
+      }
+    } else {
+      setState(() {
+        flg = true;
+      });
+    }
+  }
+
+  void equate() {
+    if (flg) {
+      if (lastMove == 'plus') {
+        var temp = int.parse(_inputVal) + int.parse(_secondInput);
+        setState(() {
+          _inputVal = temp.toString();
+          _secondInput = "";
+          flg = false;
+        });
+      } else if (lastMove == 'divide') {
+        var temp = int.parse(_inputVal) / int.parse(_secondInput);
+        setState(() {
+          _inputVal = temp.toString();
+          _secondInput = "";
+          flg = false;
+        });
+      } else if (lastMove == 'minus') {
+        var temp = int.parse(_inputVal) - int.parse(_secondInput);
+        setState(() {
+          _inputVal = temp.toString();
+          _secondInput = "";
+          flg = false;
+        });
+      } else if (lastMove == 'multiply') {
+        var temp = int.parse(_inputVal) * int.parse(_secondInput);
+        setState(() {
+          _inputVal = temp.toString();
+          _secondInput = "";
+          flg = false;
+        });
+      }
     }
   }
 
@@ -91,7 +180,7 @@ class _HomeState extends State<Home> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(5),
-                child: Text(flg ? _inputVal.toString() : ''),
+                child: Text(flg ? 'Result: $_inputVal' : ''),
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -158,7 +247,9 @@ class _HomeState extends State<Home> {
                           ),
                           ElevatedButton(
                             child: Text('÷'),
-                            onPressed: () {},
+                            onPressed: () {
+                              divide();
+                            },
                           )
                         ],
                       ),
@@ -189,7 +280,9 @@ class _HomeState extends State<Home> {
                           ),
                           ElevatedButton(
                             child: Text('✖'),
-                            onPressed: () {},
+                            onPressed: () {
+                              multiply();
+                            },
                           )
                         ],
                       ),
@@ -222,7 +315,9 @@ class _HomeState extends State<Home> {
                           ),
                           ElevatedButton(
                             child: Text('-'),
-                            onPressed: () {},
+                            onPressed: () {
+                              subtract();
+                            },
                           )
                         ],
                       ),
@@ -284,7 +379,9 @@ class _HomeState extends State<Home> {
                           ),
                           ElevatedButton(
                             child: Text('='),
-                            onPressed: () {},
+                            onPressed: () {
+                              equate();
+                            },
                           )
                         ],
                       ),
