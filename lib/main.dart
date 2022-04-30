@@ -4,6 +4,10 @@ void main() {
   runApp(const MyApp());
 }
 
+String _inputVal = "0";
+
+void calculate(int value) {}
+
 var _themes = [
   Colors.purple,
   Colors.indigo,
@@ -40,24 +44,33 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  var _output = "Not submitted";
+  var _secondInput = "0";
+  var flg = false;
 
-  void manageInput(target) {
-    var input = target.toString();
-    var flg = false;
-
-    var test = input.split('+');
-    var sum = 0;
-    if (test.length == 0) {
-      _output = '0';
+  void addNumb(int input) {
+    if (flg) {
+      setState(() {
+        _secondInput = _secondInput + input.toString();
+      });
     } else {
-      test.forEach((element) {
-        sum = sum + int.parse(element);
+      setState(() {
+        _inputVal = _inputVal + input.toString();
       });
     }
-    setState(() {
-      _output = sum.toString();
-    });
+  }
+
+  void addition() {
+    if (flg) {
+      if (_secondInput.length > 0) {
+        setState(() {
+          var temp = int.parse(_inputVal) + int.parse(_secondInput);
+          _inputVal = temp.toString();
+          _secondInput = "";
+        });
+      }
+    } else {
+      flg = true;
+    }
   }
 
   @override
@@ -77,10 +90,20 @@ class _HomeState extends State<Home> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
+                padding: const EdgeInsets.all(5),
+                child: Text(flg ? _inputVal.toString() : ''),
+              ),
+              Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Transform.scale(
                   scale: 2.0,
-                  child: Text(_output),
+                  child: Text(flg
+                      ? _secondInput == ""
+                          ? "0"
+                          : _secondInput.toString()
+                      : _inputVal == ""
+                          ? "0"
+                          : _inputVal.toString()),
                 ),
               ),
               Padding(
@@ -94,10 +117,12 @@ class _HomeState extends State<Home> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           ElevatedButton(
-                            child: Text('AC'),
+                            child: const Text('AC'),
                             onPressed: () {
                               setState(() {
-                                _output = "0";
+                                _inputVal = "";
+                                _secondInput = "";
+                                flg = false;
                               });
                             },
                           ),
@@ -117,11 +142,19 @@ class _HomeState extends State<Home> {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _themeSelected = 0;
-                              });
+                              if (flg) {
+                                setState(() {
+                                  _secondInput = _secondInput.substring(
+                                      0, _secondInput.length - 1);
+                                });
+                              } else {
+                                setState(() {
+                                  _inputVal = _inputVal.substring(
+                                      0, _inputVal.length - 1);
+                                });
+                              }
                             },
-                            child: Text('🔃'),
+                            child: const Text('C'),
                           ),
                           ElevatedButton(
                             child: Text('÷'),
@@ -137,34 +170,22 @@ class _HomeState extends State<Home> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           ElevatedButton(
-                            child: Text('7'),
+                            child: const Text('7'),
                             onPressed: () {
-                              setState(() {
-                                _output = "0";
-                              });
+                              addNumb(7);
                             },
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              if (_themeSelected == _themes.length - 1) {
-                                setState(() {
-                                  _themeSelected = 0;
-                                });
-                              } else {
-                                setState(() {
-                                  _themeSelected++;
-                                });
-                              }
+                              addNumb(8);
                             },
                             child: Text('8'),
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _themeSelected = 0;
-                              });
+                              addNumb(9);
                             },
-                            child: Text('9'),
+                            child: const Text('9'),
                           ),
                           ElevatedButton(
                             child: Text('✖'),
@@ -180,32 +201,22 @@ class _HomeState extends State<Home> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           ElevatedButton(
-                            child: Text('4'),
+                            child: const Text('4'),
                             onPressed: () {
                               setState(() {
-                                _output = "0";
+                                addNumb(4);
                               });
                             },
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              if (_themeSelected == _themes.length - 1) {
-                                setState(() {
-                                  _themeSelected = 0;
-                                });
-                              } else {
-                                setState(() {
-                                  _themeSelected++;
-                                });
-                              }
+                              addNumb(5);
                             },
                             child: Text('5'),
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _themeSelected = 0;
-                              });
+                              addNumb(6);
                             },
                             child: Text('6'),
                           ),
@@ -225,36 +236,26 @@ class _HomeState extends State<Home> {
                           ElevatedButton(
                             child: Text('1'),
                             onPressed: () {
-                              setState(() {
-                                _output = "0";
-                              });
+                              addNumb(1);
                             },
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              if (_themeSelected == _themes.length - 1) {
-                                setState(() {
-                                  _themeSelected = 0;
-                                });
-                              } else {
-                                setState(() {
-                                  _themeSelected++;
-                                });
-                              }
+                              addNumb(2);
                             },
                             child: Text('2'),
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                _themeSelected = 0;
-                              });
+                              addNumb(3);
                             },
-                            child: Text('3'),
+                            child: const Text('3'),
                           ),
                           ElevatedButton(
-                            child: Text('+'),
-                            onPressed: () {},
+                            child: const Text('+'),
+                            onPressed: () {
+                              addition();
+                            },
                           )
                         ],
                       ),
@@ -269,7 +270,7 @@ class _HomeState extends State<Home> {
                             child: Text('0'),
                             onPressed: () {
                               setState(() {
-                                _output = "0";
+                                addNumb(0);
                               });
                             },
                           ),
@@ -279,7 +280,7 @@ class _HomeState extends State<Home> {
                                 _themeSelected = 0;
                               });
                             },
-                            child: Text('.'),
+                            child: const Text('.'),
                           ),
                           ElevatedButton(
                             child: Text('='),
