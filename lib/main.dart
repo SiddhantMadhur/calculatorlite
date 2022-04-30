@@ -4,6 +4,16 @@ void main() {
   runApp(const MyApp());
 }
 
+var _themes = [
+  Colors.purple,
+  Colors.indigo,
+  Colors.blue,
+  Colors.green,
+  Colors.orange,
+  Colors.red
+];
+int _themeSelected = 0;
+
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -54,7 +64,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: _themes[_themeSelected],
         title: const Center(
           child: Text('Calculator--'),
         ),
@@ -73,14 +83,35 @@ class _HomeState extends State<Home> {
                   child: Text(_output),
                 ),
               ),
-              SizedBox(
-                width: 300.0,
-                child: TextField(
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Calculation',
-                  ),
-                  onChanged: manageInput,
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    ElevatedButton(
+                      child: Text('AC'),
+                      onPressed: () {
+                        setState(() {
+                          _output = "0";
+                        });
+                      },
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_themeSelected == _themes.length - 1) {
+                          setState(() {
+                            _themeSelected = 0;
+                          });
+                        } else {
+                          setState(() {
+                            _themeSelected++;
+                          });
+                        }
+                      },
+                      child: Text('T'),
+                    ),
+                  ],
                 ),
               )
             ],
