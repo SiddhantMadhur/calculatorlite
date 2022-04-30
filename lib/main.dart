@@ -85,31 +85,208 @@ class _HomeState extends State<Home> {
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  mainAxisSize: MainAxisSize.max,
+                child: Column(
                   children: [
-                    ElevatedButton(
-                      child: Text('AC'),
-                      onPressed: () {
-                        setState(() {
-                          _output = "0";
-                        });
-                      },
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          ElevatedButton(
+                            child: Text('AC'),
+                            onPressed: () {
+                              setState(() {
+                                _output = "0";
+                              });
+                            },
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (_themeSelected == _themes.length - 1) {
+                                setState(() {
+                                  _themeSelected = 0;
+                                });
+                              } else {
+                                setState(() {
+                                  _themeSelected++;
+                                });
+                              }
+                            },
+                            child: Text('T'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _themeSelected = 0;
+                              });
+                            },
+                            child: Text('🔃'),
+                          ),
+                          ElevatedButton(
+                            child: Text('÷'),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_themeSelected == _themes.length - 1) {
-                          setState(() {
-                            _themeSelected = 0;
-                          });
-                        } else {
-                          setState(() {
-                            _themeSelected++;
-                          });
-                        }
-                      },
-                      child: Text('T'),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          ElevatedButton(
+                            child: Text('7'),
+                            onPressed: () {
+                              setState(() {
+                                _output = "0";
+                              });
+                            },
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (_themeSelected == _themes.length - 1) {
+                                setState(() {
+                                  _themeSelected = 0;
+                                });
+                              } else {
+                                setState(() {
+                                  _themeSelected++;
+                                });
+                              }
+                            },
+                            child: Text('8'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _themeSelected = 0;
+                              });
+                            },
+                            child: Text('9'),
+                          ),
+                          ElevatedButton(
+                            child: Text('✖'),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          ElevatedButton(
+                            child: Text('4'),
+                            onPressed: () {
+                              setState(() {
+                                _output = "0";
+                              });
+                            },
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (_themeSelected == _themes.length - 1) {
+                                setState(() {
+                                  _themeSelected = 0;
+                                });
+                              } else {
+                                setState(() {
+                                  _themeSelected++;
+                                });
+                              }
+                            },
+                            child: Text('5'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _themeSelected = 0;
+                              });
+                            },
+                            child: Text('6'),
+                          ),
+                          ElevatedButton(
+                            child: Text('-'),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          ElevatedButton(
+                            child: Text('1'),
+                            onPressed: () {
+                              setState(() {
+                                _output = "0";
+                              });
+                            },
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (_themeSelected == _themes.length - 1) {
+                                setState(() {
+                                  _themeSelected = 0;
+                                });
+                              } else {
+                                setState(() {
+                                  _themeSelected++;
+                                });
+                              }
+                            },
+                            child: Text('2'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _themeSelected = 0;
+                              });
+                            },
+                            child: Text('3'),
+                          ),
+                          ElevatedButton(
+                            child: Text('+'),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          ElevatedButton(
+                            child: Text('0'),
+                            onPressed: () {
+                              setState(() {
+                                _output = "0";
+                              });
+                            },
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                _themeSelected = 0;
+                              });
+                            },
+                            child: Text('.'),
+                          ),
+                          ElevatedButton(
+                            child: Text('='),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
