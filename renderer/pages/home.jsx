@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '../styles';
@@ -23,13 +23,15 @@ function Home() {
     )
   }
 
+  const deleteTemp = () => {
+    const temp = input.substring(0, input.length - 1);
+    setInput(temp);
+  }
+
   function DeleteValue() {
     return (
       <div className={`${styles.button} bg-button-lightgray`}>
-        <button onClick={() => {
-          const temp = input.substring(0, input.length - 1);
-          setInput(temp);
-        }} className={`${styles.button} bg-button-lightgray`}>
+        <button onClick={deleteTemp} className={`${styles.button} bg-button-lightgray`}>
           C
         </button>
       </div>
@@ -47,14 +49,14 @@ function Home() {
   const Dial = (props) => (
     <div className={`${styles.button} bg-button-darkgray`}>
       <button onClick={() => {
-        if(props.child==="."){
-          if(input.includes(".")){
+        if (props.child === ".") {
+          if (input.includes(".")) {
 
-          }else{
+          } else {
             const temp = input + props.child;
             setInput(temp)
           }
-        }else{
+        } else {
           const temp = input + props.child;
           setInput(temp)
         }
@@ -63,10 +65,10 @@ function Home() {
       </button>
     </div>
   )
-
-
+ 
   const plus = () => {
-
+    setResult(result + input.valueOf())
+    setInput("")
   }
 
   const divide = () => {
@@ -87,7 +89,7 @@ function Home() {
       <Head>
         <title>Calculator</title>
       </Head>
-      <div className='text-center mt-20 '>
+      <div className='text-center mt-10 '>
         <div className='text-5xl text-right mx-5 my-3'>
           {input === '' ? 0 : input}
         </div>
@@ -108,19 +110,19 @@ function Home() {
               <Dial child="4" />
               <Dial child="5" />
               <Dial child="6" />
-              <FunctionDial symbol="×" function={multiply} />
+              <FunctionDial symbol="-" function={subtract} />
             </div>
             <div className={styles.row}>
               <Dial child="1" />
               <Dial child="2" />
               <Dial child="3" />
-              <FunctionDial symbol="×" function={multiply} />
+              <FunctionDial symbol="+" function={plus} />
             </div>
             <div className={styles.row}>
               <Dial child="0" />
               <Dial child="." />
               <Dial child="" />
-              <FunctionDial symbol="×" function={multiply} />
+              <FunctionDial symbol="=" function={equate} />
             </div>
           </div>
         </div>
