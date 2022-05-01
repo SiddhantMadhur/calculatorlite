@@ -1,5 +1,7 @@
 const styles = {
-    button: 'bg-red-200 w-full text-xl text-black rounded-xl h-10  '
+    button: 'w-full text-3xl text-black rounded-xl h-10 ',
+    row: 'flex items-stretch flex-row place-content-around gap-x-5 ',
+
   }
 
   export default styles;
