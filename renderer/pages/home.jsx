@@ -9,6 +9,7 @@ function Home() {
 
   const [result, setResult] = useState(0);
   const [input, setInput] = useState('');
+  const [lastMove, setLastMove] = useState('');
 
   function ClearValues() {
     return (
@@ -67,8 +68,11 @@ function Home() {
   )
  
   const plus = () => {
-    setResult(result + input.valueOf())
-    setInput("")
+    setLastMove('+')
+    if(input!==""){
+      setResult(Number.parseFloat(result) + Number.parseFloat(input))
+      setInput("")
+    }
   }
 
   const divide = () => {
@@ -82,7 +86,16 @@ function Home() {
 
   }
   const add = () => { }
-  const equate = () => { }
+  const equate = () => { 
+    if(lastMove!=="" && input!==""){
+      if(lastMove==='+'){
+        plus();
+        setLastMove("")
+      }
+    }
+  }
+
+  useEffect(()=>{console.log(lastMove)},[lastMove])
 
   return (
     <React.Fragment>
@@ -90,8 +103,16 @@ function Home() {
         <title>Calculator</title>
       </Head>
       <div className='text-center mt-10 '>
-        <div className='text-5xl text-right mx-5 my-3'>
+        <div className=' text-right mx-5 my-3'>
+          {result!==""?(
+            <>
+              Result: {result}
+            </>
+          ):undefined}
+          <div className='text-5xl'>
           {input === '' ? 0 : input}
+          </div>
+          
         </div>
         <div className=''>
           <div className='flex items-stretch flex-col mx-5 gap-y-3'>
